@@ -19,19 +19,26 @@
 
 ---
 
-### 2. WAV to MP3 Converter
-專業線上音訊轉換工具
+### 2. File Format Conversion Toolbox
+檔案格式轉換工具箱 - 專業線上格式轉換工具集
 
 **功能特色：**
 - 純瀏覽器端處理，無需上傳到伺服器
-- 支援批量轉換多個文件
-- 可選音質設定（128/192/256/320 kbps）
-- 拖曳上傳介面
-- 實時轉換進度顯示
+- 100% 隱私安全保護
+- 支援多種格式轉換
+- 現代化的使用者介面
 
-**📁 位置：** `wavToMp3/`
+**已包含工具：**
+- **WAV to MP3** - 音訊格式轉換（支援批量轉換、音質設定 128-320 kbps）
 
-**🔗 線上體驗：** [https://tsuifei.github.io/VibeCoding/wavToMp3/](https://tsuifei.github.io/VibeCoding/wavToMp3/)
+**即將推出：**
+- PNG/JPG/WebP 圖片格式轉換
+- PDF 文件轉換工具
+- 更多格式轉換工具...
+
+**📁 位置：** `File Format Conversion Toolbox/`
+
+**🔗 線上體驗：** [https://tsuifei.github.io/VibeCoding/File%20Format%20Conversion%20Toolbox/](https://tsuifei.github.io/VibeCoding/File%20Format%20Conversion%20Toolbox/)
 
 ---
 
