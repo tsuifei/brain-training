@@ -3,3 +3,9 @@
 node_modules/
 .vscode/
 .idea/
+
+# Clasp credentials (contains auth tokens)
+.clasprc.json
+
+# Personal notes (contains project IDs and personal info)
+note.md
