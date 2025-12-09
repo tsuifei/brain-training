@@ -31,6 +31,16 @@ const translations = {
         'tool.image.meta': '即時轉換',
         'tool.image.launch': '啟動工具',
 
+        // Image Compressor Tool
+        'tool.compressor.title': '圖片壓縮工具',
+        'tool.compressor.status': '可用',
+        'tool.compressor.description': '壓縮並優化 JPG、PNG、WebP 圖片，減少文件大小，支援批量處理和品質調整',
+        'tool.compressor.feature1': '批量壓縮',
+        'tool.compressor.feature2': '品質調整',
+        'tool.compressor.feature3': '尺寸優化',
+        'tool.compressor.meta': '即時壓縮',
+        'tool.compressor.launch': '啟動工具',
+
         // PDF Tool (Coming Soon)
         'tool.pdf.title': 'PDF Converter',
         'tool.pdf.status': '即將推出',
@@ -90,6 +100,22 @@ const translations = {
         'image.list.clear': '清空列表',
         'image.list.convert': '開始轉換',
         'image.back': '返回工具箱',
+
+        // Tool Page - Image Compressor
+        'compressor.page.title': '圖片壓縮工具',
+        'compressor.page.subtitle': 'JPG / PNG / WebP 壓縮優化',
+        'compressor.quality.label': '壓縮品質',
+        'compressor.resize.label': '調整尺寸（可選）',
+        'compressor.resize.original': '保持原始尺寸',
+        'compressor.stats.pending': '待壓縮:',
+        'compressor.stats.completed': '已完成:',
+        'compressor.upload.title': '拖曳圖片到此處',
+        'compressor.upload.or': '或',
+        'compressor.upload.select': '選擇圖片',
+        'compressor.upload.hint': '支援 JPG、PNG、WebP 格式，可批量上傳',
+        'compressor.list.title': '壓縮列表',
+        'compressor.list.clear': '清空列表',
+        'compressor.list.compress': '開始壓縮',
     },
 
     'en': {
@@ -122,6 +148,16 @@ const translations = {
         'tool.image.feature3': 'Quality Settings',
         'tool.image.meta': 'Instant Conversion',
         'tool.image.launch': 'Launch Tool',
+
+        // Image Compressor Tool
+        'tool.compressor.title': 'Image Compressor',
+        'tool.compressor.status': 'Available',
+        'tool.compressor.description': 'Compress and optimize JPG, PNG, WebP images, reduce file size, supports batch processing and quality adjustment',
+        'tool.compressor.feature1': 'Batch Compression',
+        'tool.compressor.feature2': 'Quality Adjustment',
+        'tool.compressor.feature3': 'Size Optimization',
+        'tool.compressor.meta': 'Instant Compression',
+        'tool.compressor.launch': 'Launch Tool',
 
         // PDF Tool (Coming Soon)
         'tool.pdf.title': 'PDF Converter',
@@ -182,6 +218,22 @@ const translations = {
         'image.list.clear': 'Clear All',
         'image.list.convert': 'Start Conversion',
         'image.back': 'Back to Toolbox',
+
+        // Tool Page - Image Compressor
+        'compressor.page.title': 'Image Compressor',
+        'compressor.page.subtitle': 'JPG / PNG / WebP Compression',
+        'compressor.quality.label': 'Compression Quality',
+        'compressor.resize.label': 'Resize (Optional)',
+        'compressor.resize.original': 'Keep Original Size',
+        'compressor.stats.pending': 'Pending:',
+        'compressor.stats.completed': 'Completed:',
+        'compressor.upload.title': 'Drag images here',
+        'compressor.upload.or': 'or',
+        'compressor.upload.select': 'Select Images',
+        'compressor.upload.hint': 'Supports JPG, PNG, WebP formats, batch upload available',
+        'compressor.list.title': 'Compression List',
+        'compressor.list.clear': 'Clear All',
+        'compressor.list.compress': 'Start Compression',
     },
 
     'fr': {
@@ -214,6 +266,16 @@ const translations = {
         'tool.image.feature3': 'Paramètres de qualité',
         'tool.image.meta': 'Conversion instantanée',
         'tool.image.launch': 'Lancer l\'outil',
+
+        // Image Compressor Tool
+        'tool.compressor.title': 'Compresseur d\'images',
+        'tool.compressor.status': 'Disponible',
+        'tool.compressor.description': 'Compresser et optimiser les images JPG, PNG, WebP, réduire la taille des fichiers, prend en charge le traitement par lots et l\'ajustement de la qualité',
+        'tool.compressor.feature1': 'Compression par lots',
+        'tool.compressor.feature2': 'Ajustement de qualité',
+        'tool.compressor.feature3': 'Optimisation de taille',
+        'tool.compressor.meta': 'Compression instantanée',
+        'tool.compressor.launch': 'Lancer l\'outil',
 
         // PDF Tool (Coming Soon)
         'tool.pdf.title': 'Convertisseur PDF',
@@ -274,6 +336,22 @@ const translations = {
         'image.list.clear': 'Tout effacer',
         'image.list.convert': 'Commencer la conversion',
         'image.back': 'Retour à la boîte à outils',
+
+        // Tool Page - Image Compressor
+        'compressor.page.title': 'Compresseur d\'images',
+        'compressor.page.subtitle': 'Compression JPG / PNG / WebP',
+        'compressor.quality.label': 'Qualité de compression',
+        'compressor.resize.label': 'Redimensionner (Optionnel)',
+        'compressor.resize.original': 'Conserver la taille originale',
+        'compressor.stats.pending': 'En attente :',
+        'compressor.stats.completed': 'Terminé :',
+        'compressor.upload.title': 'Glissez les images ici',
+        'compressor.upload.or': 'ou',
+        'compressor.upload.select': 'Sélectionner les images',
+        'compressor.upload.hint': 'Prend en charge les formats JPG, PNG, WebP, téléchargement par lots disponible',
+        'compressor.list.title': 'Liste de compression',
+        'compressor.list.clear': 'Tout effacer',
+        'compressor.list.compress': 'Commencer la compression',
     }
 };
 

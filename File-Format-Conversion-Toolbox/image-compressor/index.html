@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor - 圖片壓縮優化工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../i18n.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Back to Toolbox Link -->
+        <div class="back-to-toolbox">
+            <a href="../index.html" class="back-link" data-i18n="back.toolbox">← 回到工具總表</a>
+        </div>
+
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect x="8" y="8" width="24" height="24" rx="3" stroke="#43a047" stroke-width="2" fill="none"/>
+                    <path d="M20 14L20 26M14 20L26 20" stroke="#43a047" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 12L16 8M28 12L24 8M12 28L16 32M28 28L24 32" stroke="#43a047" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <div>
+                    <h1 data-i18n="compressor.page.title">圖片壓縮工具</h1>
+                    <p class="subtitle" data-i18n="compressor.page.subtitle">JPG / PNG / WebP 壓縮優化</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 控制面板 -->
+            <div class="control-panel">
+                <div class="setting-group">
+                    <label for="quality" data-i18n="compressor.quality.label">壓縮品質</label>
+                    <div class="quality-control">
+                        <input type="range" id="quality" class="quality-slider" min="1" max="100" value="80">
+                        <span class="quality-value" id="quality-value">80%</span>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label for="resize" data-i18n="compressor.resize.label">調整尺寸（可選）</label>
+                    <select id="resize" class="resize-select">
+                        <option value="original" data-i18n="compressor.resize.original">保持原始尺寸</option>
+                        <option value="1920">1920px 寬</option>
+                        <option value="1280">1280px 寬</option>
+                        <option value="800">800px 寬</option>
+                    </select>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label" data-i18n="compressor.stats.pending">待壓縮:</span>
+                        <span class="stat-value" id="pending-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label" data-i18n="compressor.stats.completed">已完成:</span>
+                        <span class="stat-value" id="completed-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上傳區域 -->
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp" multiple hidden>
+                <div class="upload-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <rect x="15" y="15" width="50" height="50" rx="5" stroke="#43a047" stroke-width="3" fill="none"/>
+                        <path d="M40 28L40 52M28 40L52 40" stroke="#43a047" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="32" cy="32" r="3" fill="#43a047" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h2 data-i18n="compressor.upload.title">拖曳圖片到此處</h2>
+                <p data-i18n="compressor.upload.or">或</p>
+                <button class="btn-primary" id="selectFilesBtn" data-i18n="compressor.upload.select">選擇圖片</button>
+                <p class="hint" data-i18n="compressor.upload.hint">支援 JPG、PNG、WebP 格式，可批量上傳</p>
+            </div>
+
+            <!-- 文件列表 -->
+            <div class="file-list" id="fileList" style="display: none;">
+                <div class="list-header">
+                    <h3 data-i18n="compressor.list.title">壓縮列表</h3>
+                    <div class="list-actions">
+                        <button class="btn-secondary" id="clearAllBtn" data-i18n="compressor.list.clear">清空列表</button>
+                        <button class="btn-primary" id="compressAllBtn" data-i18n="compressor.list.compress">開始壓縮</button>
+                    </div>
+                </div>
+                <div class="list-body" id="listBody"></div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-i18n="footer.privacy">純瀏覽器端處理，您的圖片不會上傳到服務器 | 隱私安全</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

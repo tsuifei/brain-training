@@ -215,6 +215,12 @@ body {
     color: #8e24aa;
 }
 
+.tool-icon.compressor {
+    background: #e8f5e9;
+    border: 2px solid #c8e6c9;
+    color: #43a047;
+}
+
 .tool-icon.document {
     background: #fff3e0;
     border: 2px solid #ffe0b2;
