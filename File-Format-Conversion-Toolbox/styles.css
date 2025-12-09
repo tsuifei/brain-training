@@ -121,53 +121,9 @@ body {
 
 /* Tools Grid */
 .tools-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-}
-
-/* Category Section */
-.category-section {
-    background: var(--surface-color);
-    border-radius: 16px;
-    padding: 30px;
-    border: 1px solid var(--border-color);
-}
-
-.category-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.category-icon {
-    width: 50px;
-    height: 50px;
-    background: var(--surface-light);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--border-color);
-}
-
-.category-header h3 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    flex: 1;
-}
-
-.coming-soon-badge {
-    padding: 6px 14px;
-    background: #e0e0e0;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #757575;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
 }
 
 /* Tool Card */
@@ -493,4 +449,47 @@ body {
 
 .skip-to-main:focus {
     left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .main-content {
+        padding: 30px 20px;
+    }
+
+    .intro-section h2 {
+        font-size: 28px;
+    }
+
+    .intro-section p {
+        font-size: 16px;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tool-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
 }
