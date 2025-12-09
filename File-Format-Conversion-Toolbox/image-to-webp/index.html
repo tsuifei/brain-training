@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image to WebP Converter - 圖片轉 WebP 工具</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="../i18n.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Back to Toolbox Link -->
+        <div class="back-to-toolbox">
+            <a href="../index.html" class="back-link" data-i18n="back.toolbox">← 回到工具總表</a>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher-bar">
+            <div class="language-label">Language / 語言 / Langue:</div>
+            <select id="languageSwitcher" class="language-select" aria-label="Select Language">
+                <option value="zh-TW">繁體中文</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
         <header class="header">
             <div class="logo">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -16,20 +32,19 @@
                     <path d="M8 26L14 20L20 26L26 20L32 26V29C32 30.1 31.1 31 30 31H10C8.9 31 8 30.1 8 29V26Z" fill="#8e24aa" opacity="0.4"/>
                 </svg>
                 <div>
-                    <h1>Image to WebP 轉換器</h1>
-                    <p class="subtitle">PNG / JPG 轉 WebP 格式</p>
+                    <h1 data-i18n="image.page.title">Image to WebP 轉換器</h1>
+                    <p class="subtitle" data-i18n="image.page.subtitle">PNG / JPG 轉 WebP 格式</p>
                 </div>
             </div>
-            <a href="../index.html" class="btn-back">返回工具箱</a>
         </header>
 
         <main class="main-content">
             <!-- 控制面板 -->
             <div class="control-panel">
                 <div class="setting-group">
-                    <label for="width">輸出寬度 (Output Width)</label>
+                    <label for="width" data-i18n="image.width.label">輸出寬度 (Output Width)</label>
                     <select id="width" class="width-select">
-                        <option value="original">原始尺寸</option>
+                        <option value="original" data-i18n="image.width.original">原始尺寸</option>
                         <option value="800">800 px</option>
                         <option value="1000">1000 px</option>
                         <option value="1200" selected>1200 px</option>
@@ -37,21 +52,21 @@
                     </select>
                 </div>
                 <div class="setting-group">
-                    <label for="quality">圖片品質 (Quality)</label>
+                    <label for="quality" data-i18n="image.quality.label">圖片品質 (Quality)</label>
                     <select id="quality" class="quality-select">
-                        <option value="0.7">70% (較小檔案)</option>
-                        <option value="0.8" selected>80% (平衡)</option>
-                        <option value="0.9">90% (高品質)</option>
-                        <option value="1.0">100% (最高品質)</option>
+                        <option value="0.7" data-i18n="image.quality.70">70% (較小檔案)</option>
+                        <option value="0.8" selected data-i18n="image.quality.80">80% (平衡)</option>
+                        <option value="0.9" data-i18n="image.quality.90">90% (高品質)</option>
+                        <option value="1.0" data-i18n="image.quality.100">100% (最高品質)</option>
                     </select>
                 </div>
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="stat-label">待轉換:</span>
+                        <span class="stat-label" data-i18n="wav.stats.pending">待轉換:</span>
                         <span class="stat-value" id="pending-count">0</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">已完成:</span>
+                        <span class="stat-label" data-i18n="wav.stats.completed">已完成:</span>
                         <span class="stat-value" id="completed-count">0</span>
                     </div>
                 </div>
@@ -67,19 +82,19 @@
                         <path d="M15 50L28 37L38 47L52 33L65 46V60C65 62.2 63.2 64 61 64H19C16.8 64 15 62.2 15 60V50Z" fill="#8e24aa" opacity="0.4"/>
                     </svg>
                 </div>
-                <h2>拖曳圖片到此處</h2>
-                <p>或</p>
-                <button class="btn-primary" id="selectFilesBtn">選擇圖片</button>
-                <p class="hint">支援 PNG、JPG 格式，可批量上傳</p>
+                <h2 data-i18n="image.upload.title">拖曳圖片到此處</h2>
+                <p data-i18n="wav.upload.or">或</p>
+                <button class="btn-primary" id="selectFilesBtn" data-i18n="image.upload.select">選擇圖片</button>
+                <p class="hint" data-i18n="image.upload.hint">支援 PNG、JPG 格式，可批量上傳</p>
             </div>
 
             <!-- 文件列表 -->
             <div class="file-list" id="fileList" style="display: none;">
                 <div class="list-header">
-                    <h3>轉換列表</h3>
+                    <h3 data-i18n="image.list.title">轉換列表</h3>
                     <div class="list-actions">
-                        <button class="btn-secondary" id="clearAllBtn">清空列表</button>
-                        <button class="btn-primary" id="convertAllBtn">開始轉換</button>
+                        <button class="btn-secondary" id="clearAllBtn" data-i18n="image.list.clear">清空列表</button>
+                        <button class="btn-primary" id="convertAllBtn" data-i18n="image.list.convert">開始轉換</button>
                     </div>
                 </div>
                 <div class="list-body" id="listBody"></div>
@@ -87,7 +102,7 @@
         </main>
 
         <footer class="footer">
-            <p>純瀏覽器端處理，您的圖片不會上傳到服務器 | 隱私安全</p>
+            <p data-i18n="footer.privacy">純瀏覽器端處理，您的圖片不會上傳到服務器 | 隱私安全</p>
         </footer>
     </div>
 

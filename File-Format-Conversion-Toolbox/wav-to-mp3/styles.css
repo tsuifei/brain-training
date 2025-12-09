@@ -40,6 +40,65 @@ body {
     overflow: hidden;
 }
 
+/* Back to Toolbox */
+.back-to-toolbox {
+    background: var(--bg-color);
+    padding: 12px 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.back-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.back-link:hover {
+    color: var(--primary-light);
+    transform: translateX(-4px);
+}
+
+/* Language Switcher */
+.language-switcher-bar {
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.language-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.language-select {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--surface-light);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.language-select:hover {
+    border-color: var(--primary-color);
+}
+
+.language-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
 /* Header */
 .header {
     background: var(--surface-light);

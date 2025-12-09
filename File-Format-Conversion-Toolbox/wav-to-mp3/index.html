@@ -5,39 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WAV to MP3 Converter - 專業音訊轉換工具</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="../i18n.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Back to Toolbox Link -->
+        <div class="back-to-toolbox">
+            <a href="../index.html" class="back-link" data-i18n="back.toolbox">← 回到工具總表</a>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher-bar">
+            <div class="language-label">Language / 語言 / Langue:</div>
+            <select id="languageSwitcher" class="language-select" aria-label="Select Language">
+                <option value="zh-TW">繁體中文</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
         <header class="header">
             <div class="logo">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                     <path d="M20 5L35 12.5V27.5L20 35L5 27.5V12.5L20 5Z" stroke="#3498db" stroke-width="2" fill="none"/>
                     <path d="M20 15V25M15 20H25" stroke="#3498db" stroke-width="2"/>
                 </svg>
-                <h1>WAV to MP3 轉換器</h1>
+                <h1 data-i18n="wav.page.title">WAV to MP3 轉換器</h1>
             </div>
-            <div class="version">v1.0</div>
         </header>
 
         <main class="main-content">
             <!-- 控制面板 -->
             <div class="control-panel">
                 <div class="setting-group">
-                    <label for="bitrate">音質設定 (Bitrate)</label>
+                    <label for="bitrate" data-i18n="wav.bitrate.label">音質設定 (Bitrate)</label>
                     <select id="bitrate" class="bitrate-select">
-                        <option value="128">128 kbps (標準)</option>
-                        <option value="192" selected>192 kbps (高品質)</option>
-                        <option value="256">256 kbps (極高品質)</option>
-                        <option value="320">320 kbps (最高品質)</option>
+                        <option value="128" data-i18n="wav.bitrate.128">128 kbps (標準)</option>
+                        <option value="192" selected data-i18n="wav.bitrate.192">192 kbps (高品質)</option>
+                        <option value="256" data-i18n="wav.bitrate.256">256 kbps (極高品質)</option>
+                        <option value="320" data-i18n="wav.bitrate.320">320 kbps (最高品質)</option>
                     </select>
                 </div>
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="stat-label">待轉換:</span>
+                        <span class="stat-label" data-i18n="wav.stats.pending">待轉換:</span>
                         <span class="stat-value" id="pending-count">0</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">已完成:</span>
+                        <span class="stat-label" data-i18n="wav.stats.completed">已完成:</span>
                         <span class="stat-value" id="completed-count">0</span>
                     </div>
                 </div>
@@ -52,19 +67,19 @@
                         <path d="M20 50V60C20 63.3137 22.6863 66 26 66H54C57.3137 66 60 63.3137 60 60V50" stroke="#3498db" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <h2>拖曳 WAV 文件到此處</h2>
-                <p>或</p>
-                <button class="btn-primary" id="selectFilesBtn">選擇文件</button>
-                <p class="hint">支援批量上傳多個 WAV 文件</p>
+                <h2 data-i18n="wav.upload.title">拖曳 WAV 文件到此處</h2>
+                <p data-i18n="wav.upload.or">或</p>
+                <button class="btn-primary" id="selectFilesBtn" data-i18n="wav.upload.select">選擇文件</button>
+                <p class="hint" data-i18n="wav.upload.hint">支援批量上傳多個 WAV 文件</p>
             </div>
 
             <!-- 文件列表 -->
             <div class="file-list" id="fileList" style="display: none;">
                 <div class="list-header">
-                    <h3>轉換列表</h3>
+                    <h3 data-i18n="wav.list.title">轉換列表</h3>
                     <div class="list-actions">
-                        <button class="btn-secondary" id="clearAllBtn">清空列表</button>
-                        <button class="btn-primary" id="convertAllBtn">開始轉換</button>
+                        <button class="btn-secondary" id="clearAllBtn" data-i18n="wav.list.clear">清空列表</button>
+                        <button class="btn-primary" id="convertAllBtn" data-i18n="wav.list.convert">開始轉換</button>
                     </div>
                 </div>
                 <div class="list-body" id="listBody"></div>
@@ -72,7 +87,7 @@
         </main>
 
         <footer class="footer">
-            <p>純瀏覽器端處理，您的文件不會上傳到服務器 | 隱私安全</p>
+            <p data-i18n="footer.privacy">純瀏覽器端處理，您的文件不會上傳到服務器 | 隱私安全</p>
         </footer>
     </div>
 

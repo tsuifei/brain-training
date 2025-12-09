@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Format Conversion Toolbox - 檔案格式轉換工具箱</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="i18n.js"></script>
 </head>
 <body>
-    <a href="#main-content" class="skip-to-main">跳至主要內容</a>
+    <a href="#main-content" class="skip-to-main" data-i18n="skip.main">跳至主要內容</a>
     <div class="container">
+        <!-- Language Switcher -->
+        <div class="language-switcher-bar">
+            <div class="language-label">Language / 語言 / Langue:</div>
+            <select id="languageSwitcher" class="language-select" aria-label="Select Language">
+                <option value="zh-TW">繁體中文</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
         <!-- Header -->
         <header class="header">
             <div class="header-content">
@@ -21,13 +32,13 @@
                         </svg>
                     </div>
                     <div class="logo-text">
-                        <h1>File Format Conversion Toolbox</h1>
-                        <p class="subtitle">檔案格式轉換工具箱</p>
+                        <h1 data-i18n="title">File Format Conversion Toolbox</h1>
+                        <p class="subtitle" data-i18n="subtitle">檔案格式轉換工具箱</p>
                     </div>
                 </div>
                 <div class="header-badge">
-                    <span class="badge">100% 瀏覽器端處理</span>
-                    <span class="badge">隱私安全</span>
+                    <span class="badge" data-i18n="badge.browser">100% 瀏覽器端處理</span>
+                    <span class="badge" data-i18n="badge.privacy">隱私安全</span>
                 </div>
             </div>
         </header>
@@ -36,14 +47,14 @@
         <main class="main-content" id="main-content">
             <!-- Introduction -->
             <section class="intro-section">
-                <h2>專業的線上檔案格式轉換工具集</h2>
-                <p>所有轉換均在您的瀏覽器中完成，文件不會上傳到任何伺服器，保護您的隱私安全</p>
+                <h2 data-i18n="intro.title">專業的線上檔案格式轉換工具集</h2>
+                <p data-i18n="intro.description">所有轉換均在您的瀏覽器中完成，文件不會上傳到任何伺服器，保護您的隱私安全</p>
             </section>
 
             <!-- Tools Grid -->
             <section class="tools-grid">
                 <!-- WAV to MP3 Tool Card -->
-                <div class="tool-card" role="article" aria-labelledby="wav-to-mp3-title">
+                <a href="wav-to-mp3/index.html" class="tool-card" role="article" aria-labelledby="wav-to-mp3-title">
                         <div class="tool-card-header">
                             <div class="tool-icon audio">
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -52,17 +63,17 @@
                                 </svg>
                             </div>
                             <div class="tool-title">
-                                <h4 id="wav-to-mp3-title">WAV to MP3</h4>
-                                <span class="tool-status available" role="status" aria-label="工具狀態">可用</span>
+                                <h4 id="wav-to-mp3-title" data-i18n="tool.wav.title">WAV to MP3</h4>
+                                <span class="tool-status available" role="status" aria-label="工具狀態" data-i18n="tool.wav.status">可用</span>
                             </div>
                         </div>
-                        <p class="tool-description">
+                        <p class="tool-description" data-i18n="tool.wav.description">
                             將 WAV 音訊檔案轉換為 MP3 格式，支援批量轉換和自訂音質設定（128-320 kbps）
                         </p>
                         <div class="tool-features">
-                            <span class="feature-tag">批量轉換</span>
-                            <span class="feature-tag">音質設定</span>
-                            <span class="feature-tag">拖曳上傳</span>
+                            <span class="feature-tag" data-i18n="tool.wav.feature1">批量轉換</span>
+                            <span class="feature-tag" data-i18n="tool.wav.feature2">音質設定</span>
+                            <span class="feature-tag" data-i18n="tool.wav.feature3">拖曳上傳</span>
                         </div>
                         <div class="tool-footer">
                             <span class="tool-meta">
@@ -70,19 +81,13 @@
                                     <path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10.5c-2.5 0-4.5-2-4.5-4.5S5.5 3.5 8 3.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5z"/>
                                     <path d="M8 5v3.5l2.5 1.5"/>
                                 </svg>
-                                即時轉換
+                                <span data-i18n="tool.wav.meta">即時轉換</span>
                             </span>
-                            <a href="wav-to-mp3/index.html" class="btn-launch" role="button" aria-label="啟動 WAV to MP3 轉換工具">
-                                啟動工具
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                                    <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
                         </div>
-                    </div>
+                    </a>
 
                 <!-- Image to WebP Tool Card -->
-                <div class="tool-card" role="article" aria-labelledby="image-to-webp-title">
+                <a href="image-to-webp/index.html" class="tool-card" role="article" aria-labelledby="image-to-webp-title">
                         <div class="tool-card-header">
                             <div class="tool-icon image">
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -92,17 +97,17 @@
                                 </svg>
                             </div>
                             <div class="tool-title">
-                                <h4 id="image-to-webp-title">PNG / JPG to WebP</h4>
-                                <span class="tool-status available" role="status" aria-label="工具狀態">可用</span>
+                                <h4 id="image-to-webp-title" data-i18n="tool.image.title">PNG / JPG to WebP</h4>
+                                <span class="tool-status available" role="status" aria-label="工具狀態" data-i18n="tool.image.status">可用</span>
                             </div>
                         </div>
-                        <p class="tool-description">
+                        <p class="tool-description" data-i18n="tool.image.description">
                             將 PNG、JPG 圖片轉換為 WebP 格式，支援批量轉換和自訂輸出寬度（800-1920px）
                         </p>
                         <div class="tool-features">
-                            <span class="feature-tag">批量轉換</span>
-                            <span class="feature-tag">尺寸調整</span>
-                            <span class="feature-tag">品質設定</span>
+                            <span class="feature-tag" data-i18n="tool.image.feature1">批量轉換</span>
+                            <span class="feature-tag" data-i18n="tool.image.feature2">尺寸調整</span>
+                            <span class="feature-tag" data-i18n="tool.image.feature3">品質設定</span>
                         </div>
                         <div class="tool-footer">
                             <span class="tool-meta">
@@ -110,16 +115,10 @@
                                     <path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10.5c-2.5 0-4.5-2-4.5-4.5S5.5 3.5 8 3.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5z"/>
                                     <path d="M8 5v3.5l2.5 1.5"/>
                                 </svg>
-                                即時轉換
+                                <span data-i18n="tool.image.meta">即時轉換</span>
                             </span>
-                            <a href="image-to-webp/index.html" class="btn-launch" role="button" aria-label="啟動 Image to WebP 轉換工具">
-                                啟動工具
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                                    <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
                         </div>
-                    </div>
+                    </a>
 
                 <!-- PDF Converter Tool Card (Coming Soon) -->
                 <div class="tool-card disabled">
@@ -130,11 +129,11 @@
                                 </svg>
                             </div>
                             <div class="tool-title">
-                                <h4>PDF Converter</h4>
-                                <span class="tool-status coming-soon">即將推出</span>
+                                <h4 data-i18n="tool.pdf.title">PDF Converter</h4>
+                                <span class="tool-status coming-soon" data-i18n="tool.pdf.status">即將推出</span>
                             </div>
                         </div>
-                        <p class="tool-description">
+                        <p class="tool-description" data-i18n="tool.pdf.description">
                             PDF 與其他文件格式互相轉換
                         </p>
                     </div>
@@ -145,25 +144,25 @@
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>關於工具箱</h4>
-                    <p>提供各種檔案格式轉換工具，完全在瀏覽器端處理，無需上傳文件到伺服器</p>
+                    <h4 data-i18n="footer.about.title">關於工具箱</h4>
+                    <p data-i18n="footer.about.description">提供各種檔案格式轉換工具，完全在瀏覽器端處理，無需上傳文件到伺服器</p>
                 </div>
                 <div class="footer-section">
-                    <h4>特色</h4>
+                    <h4 data-i18n="footer.features.title">特色</h4>
                     <ul>
-                        <li>100% 瀏覽器端處理</li>
-                        <li>完全免費使用</li>
-                        <li>隱私安全保護</li>
-                        <li>無文件大小限制</li>
+                        <li data-i18n="footer.features.1">100% 瀏覽器端處理</li>
+                        <li data-i18n="footer.features.2">完全免費使用</li>
+                        <li data-i18n="footer.features.3">隱私安全保護</li>
+                        <li data-i18n="footer.features.4">無文件大小限制</li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>技術支援</h4>
-                    <p>使用現代瀏覽器以獲得最佳體驗<br>推薦：Chrome, Firefox, Safari, Edge</p>
+                    <h4 data-i18n="footer.tech.title">技術支援</h4>
+                    <p data-i18n="footer.tech.description">使用現代瀏覽器以獲得最佳體驗<br>推薦：Chrome, Firefox, Safari, Edge</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 VibeCoding | Created with ❤️ by TsuiFei</p>
+                <p>&copy; <span data-i18n="footer.copyright">2024 VibeCoding | Created with ❤️ by TsuiFei</span></p>
             </div>
         </footer>
     </div>
