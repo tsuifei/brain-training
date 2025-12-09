@@ -334,19 +334,51 @@ class I18n {
     }
 
     setupLanguageSwitcher() {
-        const switcher = document.getElementById('languageSwitcher');
-        if (switcher) {
-            switcher.value = this.currentLanguage;
-            switcher.addEventListener('change', (e) => {
+        // 支持下拉選單式切換器（工具頁面）
+        const selectSwitcher = document.getElementById('languageSwitcher');
+        if (selectSwitcher) {
+            selectSwitcher.value = this.currentLanguage;
+            selectSwitcher.addEventListener('change', (e) => {
                 this.setLanguage(e.target.value);
+            });
+        }
+
+        // 支持連結式切換器（首頁）
+        const langLinks = document.querySelectorAll('.lang-link');
+        if (langLinks.length > 0) {
+            langLinks.forEach(link => {
+                // 設置初始 active 狀態
+                if (link.getAttribute('data-lang') === this.currentLanguage) {
+                    link.classList.add('active');
+                }
+
+                // 點擊事件
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    this.setLanguage(lang);
+                });
             });
         }
     }
 
     updateLanguageSwitcher() {
-        const switcher = document.getElementById('languageSwitcher');
-        if (switcher) {
-            switcher.value = this.currentLanguage;
+        // 更新下拉選單
+        const selectSwitcher = document.getElementById('languageSwitcher');
+        if (selectSwitcher) {
+            selectSwitcher.value = this.currentLanguage;
+        }
+
+        // 更新連結式切換器
+        const langLinks = document.querySelectorAll('.lang-link');
+        if (langLinks.length > 0) {
+            langLinks.forEach(link => {
+                if (link.getAttribute('data-lang') === this.currentLanguage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         }
     }
 }
