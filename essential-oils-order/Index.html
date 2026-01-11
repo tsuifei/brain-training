@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>精油訂購系統</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft JhengHei', 'PingFang TC', 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #667eea;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .product-card {
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s;
+    }
+
+    .product-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+    }
+
+    .product-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .product-latin {
+      font-style: italic;
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 4px;
+    }
+
+    .product-french {
+      color: #888;
+      font-size: 0.85em;
+      margin-bottom: 15px;
+    }
+
+    .product-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .size-option {
+      flex: 1;
+      min-width: 80px;
+    }
+
+    .size-option select,
+    .size-option input {
+      width: 100%;
+      padding: 8px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+
+    .size-option label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    .price-display {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      color: #667eea;
+      margin-top: 10px;
+    }
+
+    .cart-section {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    .cart-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-details {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .cart-item-price {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #667eea;
+      margin: 0 15px;
+    }
+
+    .remove-btn {
+      background: #ff4757;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .remove-btn:hover {
+      background: #ff3838;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #667eea;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #e0e0e0;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #5568d3;
+    }
+
+    .add-to-cart-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-top: 30px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #999;
+      padding: 40px;
+      font-size: 1.1em;
+    }
+
+    .login-warning {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      color: #856404;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .login-warning h3 {
+      margin-bottom: 10px;
+      color: #856404;
+    }
+
+    .user-info-bar {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-info-icon {
+      font-size: 1.5em;
+    }
+
+    .user-info-text {
+      flex: 1;
+    }
+
+    .user-email {
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .logout-btn {
+      background: #ff4757;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #ff3838;
+    }
+
+    .login-warning {
+      background: #fff3cd;
+      color: #856404;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 2px solid #ffc107;
+      text-align: center;
+    }
+
+    .login-warning h3 {
+      margin-bottom: 10px;
+      color: #856404;
+    }
+
+    /* 訂單確認 Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .confirm-section {
+      margin-bottom: 25px;
+    }
+
+    .confirm-section h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .confirm-info {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .confirm-info-row {
+      display: flex;
+      margin-bottom: 8px;
+    }
+
+    .confirm-info-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .confirm-label {
+      font-weight: bold;
+      color: #666;
+      min-width: 100px;
+    }
+
+    .confirm-value {
+      color: #333;
+      flex: 1;
+    }
+
+    .confirm-item {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+
+    .confirm-item-name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .confirm-item-details {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .confirm-total {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .modal-footer {
+      padding: 20px 30px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .modal-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .modal-btn-cancel {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    .modal-btn-cancel:hover {
+      background: #d0d0d0;
+    }
+
+    .modal-btn-confirm {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .modal-btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .modal-btn-confirm:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .modal-content {
+        max-height: 90vh;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-footer {
+        flex-direction: column;
+      }
+
+      .modal-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🌿 精油訂購系統</h1>
+      <p>Essential Oils Order System</p>
+    </div>
+
+    <div class="content">
+      <div id="message" class="message"></div>
+
+      <!-- 登入資訊 -->
+      <div id="userInfoBar" class="user-info-bar" style="display: none;">
+        <div class="user-info-icon">👤</div>
+        <div class="user-info-text">
+          已登入：<span class="user-email" id="userEmail"></span>
+        </div>
+        <button class="logout-btn" onclick="handleLogout()">登出</button>
+      </div>
+
+      <!-- 未登入警告 -->
+      <div id="loginWarning" class="login-warning" style="display: none;">
+        <h3>⚠️ 需要登入 Google 帳號</h3>
+        <p>此訂購系統需要使用 Google 帳號登入才能下單。請確保您已登入 Google 帳號後再使用。</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">This ordering system requires Google account login to place orders.</p>
+      </div>
+
+      <!-- 客戶資訊 -->
+      <div class="section">
+        <h2 class="section-title">客戶資訊 Customer Information</h2>
+        <div class="form-group">
+          <label for="customerName">姓名 Name *</label>
+          <input type="text" id="customerName" required>
+        </div>
+        <div class="form-group">
+          <label for="customerPhone">聯絡電話 Phone *</label>
+          <input type="tel" id="customerPhone" required>
+        </div>
+        <div class="form-group">
+          <label for="customerEmail">電子郵件 Email *</label>
+          <input type="email" id="customerEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="customerAddress">配送地址 Delivery Address *</label>
+          <textarea id="customerAddress" required></textarea>
+        </div>
+      </div>
+
+      <!-- 產品選擇 -->
+      <div class="section">
+        <h2 class="section-title">選擇精油 Select Essential Oils</h2>
+        <div id="productsContainer" class="products-grid">
+          <!-- 產品卡片將由 JavaScript 動態生成 -->
+        </div>
+      </div>
+
+      <!-- 購物車 -->
+      <div class="section">
+        <h2 class="section-title">購物車 Shopping Cart</h2>
+        <div class="cart-section">
+          <div id="cartItems">
+            <div class="empty-cart">購物車是空的 Cart is empty</div>
+          </div>
+          <div id="cartTotal" class="cart-total" style="display: none;">
+            總計 Total: NT$ <span id="totalAmount">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 備註 -->
+      <div class="section">
+        <h2 class="section-title">備註 Note</h2>
+        <div class="form-group">
+          <textarea id="orderNote" placeholder="如有特殊需求請在此說明..."></textarea>
+        </div>
+      </div>
+
+      <button id="submitBtn" class="submit-btn" onclick="submitOrder()">
+        送出訂單 Submit Order
+      </button>
+    </div>
+  </div>
+
+  <!-- 訂單確認 Modal -->
+  <div id="confirmModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>確認訂單 Confirm Order</h2>
+      </div>
+      <div class="modal-body">
+        <!-- 客戶資訊 -->
+        <div class="confirm-section">
+          <h3>客戶資訊 Customer Information</h3>
+          <div class="confirm-info">
+            <div class="confirm-info-row">
+              <span class="confirm-label">姓名 Name:</span>
+              <span class="confirm-value" id="confirmName"></span>
+            </div>
+            <div class="confirm-info-row">
+              <span class="confirm-label">電話 Phone:</span>
+              <span class="confirm-value" id="confirmPhone"></span>
+            </div>
+            <div class="confirm-info-row">
+              <span class="confirm-label">Email:</span>
+              <span class="confirm-value" id="confirmEmail"></span>
+            </div>
+            <div class="confirm-info-row">
+              <span class="confirm-label">地址 Address:</span>
+              <span class="confirm-value" id="confirmAddress"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 訂購商品 -->
+        <div class="confirm-section">
+          <h3>訂購商品 Order Items</h3>
+          <div id="confirmItems"></div>
+        </div>
+
+        <!-- 備註 -->
+        <div class="confirm-section" id="confirmNoteSection" style="display: none;">
+          <h3>備註 Note</h3>
+          <div class="confirm-info">
+            <span id="confirmNote"></span>
+          </div>
+        </div>
+
+        <!-- 總金額 -->
+        <div class="confirm-total">
+          總計 Total: NT$ <span id="confirmTotalAmount">0</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn modal-btn-cancel" onclick="closeConfirmModal()">
+          取消 Cancel
+        </button>
+        <button id="confirmSubmitBtn" class="modal-btn modal-btn-confirm" onclick="confirmAndSubmitOrder()">
+          確認送出 Confirm & Submit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let essentialOils = [];
+    let cart = [];
+    let currentUser = null;
+
+    // 檢查用戶登入狀態
+    function checkUserLogin() {
+      google.script.run
+        .withSuccessHandler(function(userInfo) {
+          currentUser = userInfo;
+
+          if (!userInfo.isLoggedIn) {
+            // 未登入 - 顯示警告並禁用功能
+            document.getElementById('loginWarning').style.display = 'block';
+            disableOrderForm();
+          } else {
+            // 已登入 - 顯示用戶資訊
+            document.getElementById('userInfoBar').style.display = 'flex';
+            document.getElementById('userEmail').textContent = userInfo.email;
+
+            // 自動填入 Email
+            document.getElementById('customerEmail').value = userInfo.email;
+            document.getElementById('customerEmail').readOnly = true;
+
+            // 可以選擇性地自動填入姓名
+            if (userInfo.name) {
+              document.getElementById('customerName').value = userInfo.name;
+            }
+          }
+
+          // 載入產品
+          loadProducts();
+        })
+        .withFailureHandler(function(error) {
+          showMessage('檢查登入狀態失敗：' + error.message, 'error');
+          document.getElementById('loginWarning').style.display = 'block';
+          disableOrderForm();
+        })
+        .getUserInfo();
+    }
+
+    // 禁用訂購表單
+    function disableOrderForm() {
+      const inputs = document.querySelectorAll('input, textarea, button, select');
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+    }
+
+    // 載入精油產品
+    function loadProducts() {
+      google.script.run
+        .withSuccessHandler(function(oils) {
+          essentialOils = oils;
+          renderProducts();
+        })
+        .withFailureHandler(function(error) {
+          showMessage('載入產品失敗：' + error.message, 'error');
+        })
+        .getEssentialOils();
+    }
+
+    // 渲染產品卡片
+    function renderProducts() {
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = '';
+
+      essentialOils.forEach(oil => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-name">${oil.nameCh}</div>
+          <div class="product-latin">${oil.nameLatin}</div>
+          <div class="product-french">${oil.nameFr}</div>
+          <div class="product-options">
+            <div class="size-option">
+              <label>尺寸 Size</label>
+              <select id="size-${oil.id}" onchange="updatePrice(${oil.id})">
+                ${oil.sizes.map((size, index) =>
+                  `<option value="${index}">${size}</option>`
+                ).join('')}
+              </select>
+            </div>
+            <div class="size-option">
+              <label>數量 Qty</label>
+              <input type="number" id="qty-${oil.id}" min="1" value="1" onchange="updatePrice(${oil.id})">
+            </div>
+          </div>
+          <div class="price-display" id="price-${oil.id}">
+            NT$ ${oil.prices[0]}
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart(${oil.id})">
+            加入購物車 Add to Cart
+          </button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // 更新價格顯示
+    function updatePrice(oilId) {
+      const oil = essentialOils.find(o => o.id === oilId);
+      const sizeIndex = parseInt(document.getElementById(`size-${oilId}`).value);
+      const quantity = parseInt(document.getElementById(`qty-${oilId}`).value) || 1;
+      const price = oil.prices[sizeIndex];
+      const total = price * quantity;
+
+      document.getElementById(`price-${oilId}`).textContent = `NT$ ${total.toLocaleString()}`;
+    }
+
+    // 加入購物車
+    function addToCart(oilId) {
+      const oil = essentialOils.find(o => o.id === oilId);
+      const sizeIndex = parseInt(document.getElementById(`size-${oilId}`).value);
+      const quantity = parseInt(document.getElementById(`qty-${oilId}`).value) || 1;
+
+      const cartItem = {
+        id: Date.now(),
+        oilId: oil.id,
+        nameCh: oil.nameCh,
+        nameLatin: oil.nameLatin,
+        nameFr: oil.nameFr,
+        size: oil.sizes[sizeIndex],
+        price: oil.prices[sizeIndex],
+        quantity: quantity
+      };
+
+      cart.push(cartItem);
+      renderCart();
+      showMessage('已加入購物車！', 'success');
+    }
+
+    // 從購物車移除
+    function removeFromCart(itemId) {
+      cart = cart.filter(item => item.id !== itemId);
+      renderCart();
+    }
+
+    // 渲染購物車
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      const totalAmountSpan = document.getElementById('totalAmount');
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="empty-cart">購物車是空的 Cart is empty</div>';
+        cartTotal.style.display = 'none';
+        return;
+      }
+
+      let total = 0;
+      cartItemsContainer.innerHTML = '';
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'cart-item';
+        cartItemDiv.innerHTML = `
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.nameCh}</div>
+            <div class="cart-item-details">
+              ${item.size} × ${item.quantity} = NT$ ${subtotal.toLocaleString()}
+            </div>
+          </div>
+          <div class="cart-item-price">NT$ ${subtotal.toLocaleString()}</div>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">移除</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+      });
+
+      totalAmountSpan.textContent = total.toLocaleString();
+      cartTotal.style.display = 'block';
+    }
+
+    // 顯示訊息
+    function showMessage(text, type) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type} show`;
+
+      setTimeout(() => {
+        messageDiv.className = 'message';
+      }, 5000);
+    }
+
+    // 提交訂單（顯示確認對話框）
+    function submitOrder() {
+      // 驗證客戶資訊
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerPhone = document.getElementById('customerPhone').value.trim();
+      const customerEmail = document.getElementById('customerEmail').value.trim();
+      const customerAddress = document.getElementById('customerAddress').value.trim();
+
+      if (!customerName || !customerPhone || !customerEmail || !customerAddress) {
+        showMessage('請填寫所有必填的客戶資訊', 'error');
+        return;
+      }
+
+      // 驗證購物車
+      if (cart.length === 0) {
+        showMessage('請至少選擇一項產品', 'error');
+        return;
+      }
+
+      // 檢查登入狀態
+      if (!currentUser || !currentUser.isLoggedIn) {
+        showMessage('請先登入 Google 帳號才能下單', 'error');
+        return;
+      }
+
+      // 顯示確認 Modal
+      showConfirmModal();
+    }
+
+    // 顯示確認 Modal
+    function showConfirmModal() {
+      // 填入客戶資訊
+      document.getElementById('confirmName').textContent = document.getElementById('customerName').value.trim();
+      document.getElementById('confirmPhone').textContent = document.getElementById('customerPhone').value.trim();
+      document.getElementById('confirmEmail').textContent = document.getElementById('customerEmail').value.trim();
+      document.getElementById('confirmAddress').textContent = document.getElementById('customerAddress').value.trim();
+
+      // 填入訂購商品
+      const confirmItemsContainer = document.getElementById('confirmItems');
+      confirmItemsContainer.innerHTML = '';
+
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'confirm-item';
+        itemDiv.innerHTML = `
+          <div class="confirm-item-name">${item.nameCh} (${item.nameLatin})</div>
+          <div class="confirm-item-details">
+            ${item.size} × ${item.quantity} = NT$ ${subtotal.toLocaleString()}
+          </div>
+        `;
+        confirmItemsContainer.appendChild(itemDiv);
+      });
+
+      // 填入總金額
+      document.getElementById('confirmTotalAmount').textContent = total.toLocaleString();
+
+      // 填入備註（如果有）
+      const noteText = document.getElementById('orderNote').value.trim();
+      if (noteText) {
+        document.getElementById('confirmNote').textContent = noteText;
+        document.getElementById('confirmNoteSection').style.display = 'block';
+      } else {
+        document.getElementById('confirmNoteSection').style.display = 'none';
+      }
+
+      // 顯示 Modal
+      document.getElementById('confirmModal').classList.add('show');
+    }
+
+    // 關閉確認 Modal
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.remove('show');
+    }
+
+    // 確認並送出訂單
+    function confirmAndSubmitOrder() {
+      // 準備訂單資料
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerPhone = document.getElementById('customerPhone').value.trim();
+      const customerEmail = document.getElementById('customerEmail').value.trim();
+      const customerAddress = document.getElementById('customerAddress').value.trim();
+      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      const orderData = {
+        customerInfo: {
+          name: customerName,
+          phone: customerPhone,
+          email: customerEmail,
+          address: customerAddress
+        },
+        items: cart,
+        totalAmount: totalAmount,
+        note: document.getElementById('orderNote').value.trim(),
+        loginEmail: currentUser.email
+      };
+
+      // 禁用確認按鈕
+      const confirmBtn = document.getElementById('confirmSubmitBtn');
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = '處理中... Processing...';
+
+      // 提交訂單
+      google.script.run
+        .withSuccessHandler(function(result) {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = '確認送出 Confirm & Submit';
+
+          // 關閉 Modal
+          closeConfirmModal();
+
+          if (result.success) {
+            showMessage(result.message, 'success');
+
+            // 清空表單和購物車，還原產品選項
+            resetOrderForm();
+
+            // 顯示 Sheet 連結
+            if (result.sheetUrl) {
+              setTimeout(() => {
+                showMessage(`訂單已成功提交並已寄送 Email！查看訂單記錄：${result.sheetUrl}`, 'success');
+              }, 500);
+            }
+          } else {
+            showMessage(result.message, 'error');
+          }
+        })
+        .withFailureHandler(function(error) {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = '確認送出 Confirm & Submit';
+          closeConfirmModal();
+          showMessage('提交失敗：' + error.message, 'error');
+        })
+        .submitOrder(orderData);
+    }
+
+    // 重置訂單表單
+    function resetOrderForm() {
+      // 清空客戶資訊（保留 Email）
+      document.getElementById('customerName').value = '';
+      document.getElementById('customerPhone').value = '';
+      document.getElementById('customerAddress').value = '';
+      document.getElementById('orderNote').value = '';
+
+      // 清空購物車
+      cart = [];
+      renderCart();
+
+      // 還原所有產品選項到預設值
+      essentialOils.forEach(oil => {
+        const sizeSelect = document.getElementById(`size-${oil.id}`);
+        const qtyInput = document.getElementById(`qty-${oil.id}`);
+
+        if (sizeSelect) {
+          sizeSelect.selectedIndex = 0; // 選擇第一個尺寸
+        }
+
+        if (qtyInput) {
+          qtyInput.value = 1; // 數量重置為 1
+        }
+
+        // 更新價格顯示
+        updatePrice(oil.id);
+      });
+
+      // 捲動到頁面頂部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 處理登出
+    function handleLogout() {
+      if (confirm('確定要登出嗎？\nAre you sure you want to logout?')) {
+        google.script.run
+          .withSuccessHandler(function(result) {
+            if (result.success && result.logoutUrl) {
+              // 重定向到登出頁面
+              window.location.href = result.logoutUrl;
+            }
+          })
+          .withFailureHandler(function(error) {
+            showMessage('登出失敗：' + error.message, 'error');
+          })
+          .logout();
+      }
+    }
+
+    // 頁面載入時初始化
+    window.onload = function() {
+      checkUserLogin();
+    };
+  </script>
+</body>
+</html>

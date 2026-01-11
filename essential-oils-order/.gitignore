@@ -1,0 +1,22 @@
+# Clasp
+.clasp.json
+.clasprc.json
+.clasp.json.old
+.clasp.json.backup
+.clasp.json.wrong
+.clasp.json.new
+
+# Apps Script
+**/*~
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup
+*.old
