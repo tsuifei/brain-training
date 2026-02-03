@@ -147,28 +147,64 @@ function moveScriptToFolder() {
  */
 function getUserInfo() {
   try {
-    // 在 Web App 模式下，使用 OAuth Token 來確認登入狀態
-    const token = ScriptApp.getOAuthToken();
+    // 方法 1: 使用 Session.getEffectiveUser()（更可靠）
+    let email = '';
+    let name = '';
 
-    if (token) {
-      // 用戶已通過 OAuth 認證
-      const user = Session.getActiveUser();
-      const email = user.getEmail();
+    try {
+      const effectiveUser = Session.getEffectiveUser();
+      email = effectiveUser.getEmail();
+    } catch (e) {
+      Logger.log('Session.getEffectiveUser() failed: ' + e.toString());
+    }
 
-      // 如果 Session.getActiveUser() 無法取得 email
-      // 表示已登入但無法取得詳細資訊（GAS 限制）
-      // 此時我們仍視為已登入
+    // 方法 2: 如果方法 1 失敗，使用 Session.getActiveUser()
+    if (!email) {
+      try {
+        const activeUser = Session.getActiveUser();
+        email = activeUser.getEmail();
+      } catch (e) {
+        Logger.log('Session.getActiveUser() failed: ' + e.toString());
+      }
+    }
+
+    // 方法 3: 檢查 OAuth Token（最後的確認）
+    try {
+      const token = ScriptApp.getOAuthToken();
+      if (token && !email) {
+        // 有 token 但無法取得 email，使用臨時識別
+        email = 'authenticated-user@temp';
+        Logger.log('User authenticated but email unavailable');
+      }
+    } catch (e) {
+      Logger.log('ScriptApp.getOAuthToken() failed: ' + e.toString());
+    }
+
+    // 如果成功取得 email
+    if (email && email !== 'authenticated-user@temp') {
+      name = email.split('@')[0];
       return {
         isLoggedIn: true,
-        email: email || 'user@example.com', // 預設值
-        name: email ? email.split('@')[0] : 'User'
+        email: email,
+        name: name
       };
     }
+
+    // 如果有臨時識別
+    if (email === 'authenticated-user@temp') {
+      return {
+        isLoggedIn: true,
+        email: 'user@example.com',
+        name: 'User',
+        isTemporary: true
+      };
+    }
+
   } catch (e) {
     Logger.log('getUserInfo error: ' + e.toString());
   }
 
-  // 無法取得 token，視為未登入
+  // 無法取得用戶資訊，視為未登入
   return {
     isLoggedIn: false,
     email: '',
@@ -181,14 +217,18 @@ function getUserInfo() {
  */
 function getEssentialOils() {
   try {
+    Logger.log('getEssentialOils() called');
     let productSheetId = PRODUCT_SHEET_ID;
 
     // 如果沒有設定產品列表 Sheet ID，創建範例資料
     if (!productSheetId) {
+      Logger.log('No PRODUCT_SHEET_ID configured, using default oils');
       return getDefaultEssentialOils();
     }
 
-    const sheet = SpreadsheetApp.openById(productSheetId).getSheetByName('產品列表');
+    Logger.log('Opening product sheet: ' + productSheetId);
+    const spreadsheet = SpreadsheetApp.openById(productSheetId);
+    const sheet = spreadsheet.getSheetByName('產品列表');
 
     if (!sheet) {
       Logger.log('找不到「產品列表」工作表，使用預設資料');
@@ -197,6 +237,7 @@ function getEssentialOils() {
 
     // 讀取所有資料（假設第一行是標題）
     const data = sheet.getDataRange().getValues();
+    Logger.log('Read ' + data.length + ' rows from sheet');
 
     // 移除標題行
     const headers = data.shift();
@@ -239,10 +280,13 @@ function getEssentialOils() {
       }
     });
 
+    Logger.log('Successfully loaded ' + oils.length + ' products');
     return oils.length > 0 ? oils : getDefaultEssentialOils();
 
   } catch (error) {
     Logger.log('讀取產品列表時發生錯誤: ' + error.toString());
+    Logger.log('Error stack: ' + error.stack);
+    // 發生錯誤時返回預設資料，確保應用仍可運作
     return getDefaultEssentialOils();
   }
 }
@@ -324,11 +368,24 @@ function getDefaultEssentialOils() {
  */
 function submitOrder(orderData) {
   try {
+    Logger.log('submitOrder() called');
+    Logger.log('Order data received: ' + JSON.stringify(orderData));
+
+    // 驗證訂單資料
+    if (!orderData || !orderData.customerInfo || !orderData.items || orderData.items.length === 0) {
+      Logger.log('Invalid order data');
+      return {
+        success: false,
+        message: '訂單資料不完整，請檢查後重試'
+      };
+    }
+
     // 如果沒有設定 ORDER_SHEET_ID，自動創建新的 Google Sheet
     let sheetId = ORDER_SHEET_ID;
     let sheet;
 
     if (!sheetId) {
+      Logger.log('Creating new order sheet...');
       const spreadsheet = SpreadsheetApp.create('精油訂單記錄');
       sheetId = spreadsheet.getId();
       sheet = spreadsheet.getActiveSheet();
@@ -404,7 +461,9 @@ function submitOrder(orderData) {
     });
 
     // 將資料寫入 Sheet
+    Logger.log('Writing ' + rows.length + ' rows to sheet...');
     sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, rows[0].length).setValues(rows);
+    Logger.log('Data written successfully');
 
     // 發送訂單確認 Email
     try {
@@ -412,9 +471,11 @@ function submitOrder(orderData) {
       Logger.log('訂單確認 Email 已發送給: ' + customerInfo.email);
     } catch (emailError) {
       Logger.log('發送 Email 時發生錯誤: ' + emailError.toString());
+      Logger.log('Email error stack: ' + emailError.stack);
       // Email 發送失敗不影響訂單提交成功
     }
 
+    Logger.log('Order submitted successfully');
     return {
       success: true,
       message: '訂單已成功提交！',
@@ -424,6 +485,7 @@ function submitOrder(orderData) {
 
   } catch (error) {
     Logger.log('提交訂單時發生錯誤: ' + error.toString());
+    Logger.log('Error stack: ' + error.stack);
     return {
       success: false,
       message: '訂單提交失敗：' + error.toString()

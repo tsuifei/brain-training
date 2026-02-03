@@ -88,6 +88,28 @@
       border-color: #667eea;
     }
 
+    .form-group input.error,
+    .form-group textarea.error {
+      border-color: #ff4757;
+      background: #fff5f5;
+    }
+
+    .error-text {
+      color: #ff4757;
+      font-size: 0.85em;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-text.show {
+      display: block;
+    }
+
+    .form-group input.valid,
+    .form-group textarea.valid {
+      border-color: #4caf50;
+    }
+
     .form-group textarea {
       resize: vertical;
       min-height: 80px;
@@ -310,6 +332,183 @@
       font-size: 1.1em;
     }
 
+    /* 全局 Loading Overlay */
+    .global-loading {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .global-loading.show {
+      display: flex;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: white;
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 購物車計數徽章 */
+    .cart-badge {
+      background: #ff4757;
+      color: white;
+      border-radius: 50%;
+      padding: 4px 8px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-left: 8px;
+      min-width: 24px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    /* 產品搜索欄 */
+    .search-box {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 45px 15px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 1.2em;
+      pointer-events: none;
+    }
+
+    /* 清空購物車按鈕 */
+    .clear-cart-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.3s;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .clear-cart-btn:hover {
+      background: #ff5252;
+    }
+
+    /* 訂單成功動畫 */
+    .success-animation {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .success-animation.show {
+      display: flex;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .success-icon {
+      font-size: 100px;
+      animation: bounce 0.6s;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-30px); }
+      60% { transform: translateY(-15px); }
+    }
+
+    .success-message {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .success-message h2 {
+      color: #4caf50;
+      margin-bottom: 15px;
+      font-size: 2em;
+    }
+
+    .success-message p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .success-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s;
+    }
+
+    .success-btn:hover {
+      transform: translateY(-2px);
+    }
+
     .login-warning {
       background: #fff3cd;
       border: 2px solid #ffc107;
@@ -334,6 +533,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .user-info-icon {
@@ -535,20 +735,86 @@
     }
 
     @media (max-width: 768px) {
-      .content {
-        padding: 20px;
+      body {
+        padding: 10px;
       }
 
-      .products-grid {
-        grid-template-columns: 1fr;
+      .container {
+        border-radius: 10px;
+      }
+
+      .header {
+        padding: 20px;
       }
 
       .header h1 {
         font-size: 1.8em;
       }
 
+      .header p {
+        font-size: 1em;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .section-title {
+        font-size: 1.3em;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .product-card {
+        padding: 15px;
+      }
+
+      .product-options {
+        flex-direction: column;
+      }
+
+      .size-option {
+        min-width: 100%;
+      }
+
+      .user-info-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .user-info-text {
+        width: 100%;
+      }
+
+      .logout-btn {
+        width: 100%;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .cart-item-price {
+        margin: 0;
+      }
+
       .modal-content {
         max-height: 90vh;
+        margin: 10px;
+      }
+
+      .modal-header {
+        padding: 15px 20px;
+      }
+
+      .modal-header h2 {
+        font-size: 1.3em;
       }
 
       .modal-body {
@@ -557,10 +823,56 @@
 
       .modal-footer {
         flex-direction: column;
+        padding: 15px 20px;
       }
 
       .modal-btn {
         width: 100%;
+      }
+
+      .confirm-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .confirm-label {
+        margin-bottom: 3px;
+      }
+
+      .success-message {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+
+      .success-message h2 {
+        font-size: 1.5em;
+      }
+
+      .success-icon {
+        font-size: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.5em;
+      }
+
+      .header p {
+        font-size: 0.9em;
+      }
+
+      .section-title {
+        font-size: 1.2em;
+      }
+
+      .product-name {
+        font-size: 1.1em;
+      }
+
+      .submit-btn {
+        font-size: 1em;
+        padding: 15px;
       }
     }
   </style>
@@ -581,6 +893,9 @@
         <div class="user-info-text">
           已登入：<span class="user-email" id="userEmail"></span>
         </div>
+        <button class="logout-btn" onclick="reloadProducts()" style="background: #667eea; margin-right: 10px;">
+          🔄 重新載入產品
+        </button>
         <button class="logout-btn" onclick="handleLogout()">登出</button>
       </div>
 
@@ -596,25 +911,36 @@
         <h2 class="section-title">客戶資訊 Customer Information</h2>
         <div class="form-group">
           <label for="customerName">姓名 Name *</label>
-          <input type="text" id="customerName" required>
+          <input type="text" id="customerName" required onblur="validateField('customerName')">
+          <div class="error-text" id="customerNameError">請輸入姓名 Please enter your name</div>
         </div>
         <div class="form-group">
           <label for="customerPhone">聯絡電話 Phone *</label>
-          <input type="tel" id="customerPhone" required>
+          <input type="tel" id="customerPhone" required onblur="validateField('customerPhone')">
+          <div class="error-text" id="customerPhoneError">請輸入有效的電話號碼 Please enter a valid phone number</div>
         </div>
         <div class="form-group">
           <label for="customerEmail">電子郵件 Email *</label>
-          <input type="email" id="customerEmail" required>
+          <input type="email" id="customerEmail" required onblur="validateField('customerEmail')">
+          <div class="error-text" id="customerEmailError">請輸入有效的電子郵件 Please enter a valid email</div>
         </div>
         <div class="form-group">
           <label for="customerAddress">配送地址 Delivery Address *</label>
-          <textarea id="customerAddress" required></textarea>
+          <textarea id="customerAddress" required onblur="validateField('customerAddress')"></textarea>
+          <div class="error-text" id="customerAddressError">請輸入配送地址 Please enter delivery address</div>
         </div>
       </div>
 
       <!-- 產品選擇 -->
       <div class="section">
         <h2 class="section-title">選擇精油 Select Essential Oils</h2>
+
+        <!-- 搜索欄 -->
+        <div class="search-box">
+          <input type="text" id="productSearch" placeholder="搜索精油名稱... Search essential oils..." onkeyup="filterProducts()">
+          <span class="search-icon">🔍</span>
+        </div>
+
         <div id="productsContainer" class="products-grid">
           <!-- 產品卡片將由 JavaScript 動態生成 -->
         </div>
@@ -622,11 +948,17 @@
 
       <!-- 購物車 -->
       <div class="section">
-        <h2 class="section-title">購物車 Shopping Cart</h2>
+        <h2 class="section-title">
+          購物車 Shopping Cart
+          <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
+        </h2>
         <div class="cart-section">
           <div id="cartItems">
             <div class="empty-cart">購物車是空的 Cart is empty</div>
           </div>
+          <button id="clearCartBtn" class="clear-cart-btn" onclick="clearCart()" style="display: none;">
+            🗑️ 清空購物車 Clear Cart
+          </button>
           <div id="cartTotal" class="cart-total" style="display: none;">
             總計 Total: NT$ <span id="totalAmount">0</span>
           </div>
@@ -644,6 +976,24 @@
       <button id="submitBtn" class="submit-btn" onclick="submitOrder()">
         送出訂單 Submit Order
       </button>
+    </div>
+  </div>
+
+  <!-- 全局 Loading Overlay -->
+  <div id="globalLoading" class="global-loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loadingText">載入中...</div>
+  </div>
+
+  <!-- 訂單成功動畫 -->
+  <div id="successAnimation" class="success-animation">
+    <div class="success-icon">✅</div>
+    <div class="success-message">
+      <h2>訂單提交成功！</h2>
+      <p>感謝您的訂購！</p>
+      <p>訂單確認 Email 已發送至您的信箱。</p>
+      <p id="orderSheetLink" style="margin-top: 15px;"></p>
+      <button class="success-btn" onclick="closeSuccessAnimation()">繼續訂購 Continue</button>
     </div>
   </div>
 
@@ -711,19 +1061,128 @@
     let essentialOils = [];
     let cart = [];
     let currentUser = null;
+    let isLoadingUser = false; // 防止重複調用
+    let isLoadingProducts = false; // 防止重複調用
+    let productsLoaded = false; // 產品是否已載入
+
+    // 全局 Loading 控制
+    function showGlobalLoading(text = '載入中...') {
+      document.getElementById('loadingText').textContent = text;
+      document.getElementById('globalLoading').classList.add('show');
+    }
+
+    function hideGlobalLoading() {
+      document.getElementById('globalLoading').classList.remove('show');
+    }
+
+    // 成功動畫控制
+    function showSuccessAnimation(sheetUrl = '') {
+      if (sheetUrl) {
+        document.getElementById('orderSheetLink').innerHTML =
+          `<a href="${sheetUrl}" target="_blank" style="color: #667eea; text-decoration: underline;">查看訂單記錄 View Order Record</a>`;
+      }
+      document.getElementById('successAnimation').classList.add('show');
+    }
+
+    function closeSuccessAnimation() {
+      document.getElementById('successAnimation').classList.remove('show');
+      document.getElementById('orderSheetLink').innerHTML = '';
+    }
+
+    // 更新購物車徽章
+    function updateCartBadge() {
+      const badge = document.getElementById('cartBadge');
+      const clearBtn = document.getElementById('clearCartBtn');
+
+      if (cart.length > 0) {
+        badge.textContent = cart.length;
+        badge.style.display = 'inline-block';
+        clearBtn.style.display = 'block';
+      } else {
+        badge.style.display = 'none';
+        clearBtn.style.display = 'none';
+      }
+    }
+
+    // 清空購物車
+    function clearCart() {
+      if (confirm('確定要清空購物車嗎？\nClear all items from cart?')) {
+        cart = [];
+        renderCart();
+        showMessage('購物車已清空 Cart cleared', 'success');
+      }
+    }
+
+    // 過濾產品
+    function filterProducts() {
+      const searchText = document.getElementById('productSearch').value.toLowerCase().trim();
+      const productCards = document.querySelectorAll('.product-card');
+
+      let visibleCount = 0;
+
+      productCards.forEach(card => {
+        const nameCh = card.querySelector('.product-name').textContent.toLowerCase();
+        const nameLatin = card.querySelector('.product-latin').textContent.toLowerCase();
+        const nameFr = card.querySelector('.product-french').textContent.toLowerCase();
+
+        const isMatch = nameCh.includes(searchText) ||
+                       nameLatin.includes(searchText) ||
+                       nameFr.includes(searchText);
+
+        if (isMatch) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // 如果沒有匹配結果，顯示提示
+      const container = document.getElementById('productsContainer');
+      let noResultDiv = document.getElementById('noSearchResult');
+
+      if (visibleCount === 0 && searchText) {
+        if (!noResultDiv) {
+          noResultDiv = document.createElement('div');
+          noResultDiv.id = 'noSearchResult';
+          noResultDiv.className = 'empty-cart';
+          noResultDiv.textContent = '找不到符合的產品 No products found';
+          container.appendChild(noResultDiv);
+        }
+      } else {
+        if (noResultDiv) {
+          noResultDiv.remove();
+        }
+      }
+    }
 
     // 檢查用戶登入狀態
     function checkUserLogin() {
+      // 防止重複調用
+      if (isLoadingUser) {
+        console.log('Already checking user login, skipping...');
+        return;
+      }
+
+      isLoadingUser = true;
+      console.log('Checking user login status...');
+      showGlobalLoading('檢查登入狀態...');
+
       google.script.run
         .withSuccessHandler(function(userInfo) {
+          isLoadingUser = false;
+          hideGlobalLoading();
+          console.log('User info received:', userInfo);
           currentUser = userInfo;
 
           if (!userInfo.isLoggedIn) {
             // 未登入 - 顯示警告並禁用功能
             document.getElementById('loginWarning').style.display = 'block';
+            document.getElementById('userInfoBar').style.display = 'none';
             disableOrderForm();
           } else {
             // 已登入 - 顯示用戶資訊
+            document.getElementById('loginWarning').style.display = 'none';
             document.getElementById('userInfoBar').style.display = 'flex';
             document.getElementById('userEmail').textContent = userInfo.email;
 
@@ -732,17 +1191,23 @@
             document.getElementById('customerEmail').readOnly = true;
 
             // 可以選擇性地自動填入姓名
-            if (userInfo.name) {
+            if (userInfo.name && userInfo.name !== 'User') {
               document.getElementById('customerName').value = userInfo.name;
             }
           }
 
-          // 載入產品
-          loadProducts();
+          // 載入產品（只載入一次）
+          if (!productsLoaded) {
+            loadProducts();
+          }
         })
         .withFailureHandler(function(error) {
+          isLoadingUser = false;
+          hideGlobalLoading();
+          console.error('Check user login failed:', error);
           showMessage('檢查登入狀態失敗：' + error.message, 'error');
           document.getElementById('loginWarning').style.display = 'block';
+          document.getElementById('userInfoBar').style.display = 'none';
           disableOrderForm();
         })
         .getUserInfo();
@@ -758,15 +1223,46 @@
 
     // 載入精油產品
     function loadProducts() {
+      // 防止重複調用
+      if (isLoadingProducts || productsLoaded) {
+        console.log('Already loading or loaded products, skipping...');
+        return;
+      }
+
+      isLoadingProducts = true;
+      console.log('Loading products...');
+      showGlobalLoading('載入產品列表...');
+
       google.script.run
         .withSuccessHandler(function(oils) {
+          isLoadingProducts = false;
+          productsLoaded = true;
+          hideGlobalLoading();
+          console.log('Products loaded:', oils.length);
           essentialOils = oils;
           renderProducts();
+          showMessage(`成功載入 ${oils.length} 個產品 Loaded ${oils.length} products`, 'success');
         })
         .withFailureHandler(function(error) {
+          isLoadingProducts = false;
+          hideGlobalLoading();
+          console.error('Load products failed:', error);
           showMessage('載入產品失敗：' + error.message, 'error');
+
+          // 允許重試
+          setTimeout(function() {
+            productsLoaded = false;
+          }, 5000);
         })
         .getEssentialOils();
+    }
+
+    // 重新載入產品列表
+    function reloadProducts() {
+      console.log('Manually reloading products...');
+      productsLoaded = false;
+      isLoadingProducts = false;
+      loadProducts();
     }
 
     // 渲染產品卡片
@@ -851,6 +1347,9 @@
       const cartTotal = document.getElementById('cartTotal');
       const totalAmountSpan = document.getElementById('totalAmount');
 
+      // 更新購物車徽章
+      updateCartBadge();
+
       if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<div class="empty-cart">購物車是空的 Cart is empty</div>';
         cartTotal.style.display = 'none';
@@ -894,8 +1393,87 @@
       }, 5000);
     }
 
+    // 驗證單一欄位
+    function validateField(fieldId) {
+      const field = document.getElementById(fieldId);
+      const errorDiv = document.getElementById(fieldId + 'Error');
+      const value = field.value.trim();
+
+      let isValid = true;
+      let errorMessage = '';
+
+      switch(fieldId) {
+        case 'customerName':
+          isValid = value.length >= 2;
+          errorMessage = '請輸入至少2個字元的姓名';
+          break;
+
+        case 'customerPhone':
+          // 驗證台灣手機或市話號碼
+          const phoneRegex = /^[\d\s\-\+\(\)]{8,20}$/;
+          isValid = phoneRegex.test(value);
+          errorMessage = '請輸入有效的電話號碼';
+          break;
+
+        case 'customerEmail':
+          // 驗證 Email 格式
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          isValid = emailRegex.test(value);
+          errorMessage = '請輸入有效的電子郵件';
+          break;
+
+        case 'customerAddress':
+          isValid = value.length >= 5;
+          errorMessage = '請輸入完整的配送地址';
+          break;
+      }
+
+      if (!isValid && value) {
+        field.classList.add('error');
+        field.classList.remove('valid');
+        errorDiv.textContent = errorMessage;
+        errorDiv.classList.add('show');
+      } else if (isValid && value) {
+        field.classList.remove('error');
+        field.classList.add('valid');
+        errorDiv.classList.remove('show');
+      } else {
+        field.classList.remove('error', 'valid');
+        errorDiv.classList.remove('show');
+      }
+
+      return isValid;
+    }
+
+    // 驗證所有表單欄位
+    function validateAllFields() {
+      const fields = ['customerName', 'customerPhone', 'customerEmail', 'customerAddress'];
+      let allValid = true;
+
+      fields.forEach(fieldId => {
+        const isValid = validateField(fieldId);
+        if (!isValid) {
+          allValid = false;
+        }
+      });
+
+      return allValid;
+    }
+
     // 提交訂單（顯示確認對話框）
     function submitOrder() {
+      // 驗證所有表單欄位
+      if (!validateAllFields()) {
+        showMessage('請正確填寫所有必填欄位 Please fill all required fields correctly', 'error');
+        // 滾動到第一個錯誤欄位
+        const firstError = document.querySelector('.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+
       // 驗證客戶資訊
       const customerName = document.getElementById('customerName').value.trim();
       const customerPhone = document.getElementById('customerPhone').value.trim();
@@ -903,19 +1481,21 @@
       const customerAddress = document.getElementById('customerAddress').value.trim();
 
       if (!customerName || !customerPhone || !customerEmail || !customerAddress) {
-        showMessage('請填寫所有必填的客戶資訊', 'error');
+        showMessage('請填寫所有必填的客戶資訊 Please fill all required customer information', 'error');
         return;
       }
 
       // 驗證購物車
       if (cart.length === 0) {
-        showMessage('請至少選擇一項產品', 'error');
+        showMessage('請至少選擇一項產品 Please select at least one product', 'error');
+        // 滾動到產品區域
+        document.getElementById('productsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
         return;
       }
 
       // 檢查登入狀態
       if (!currentUser || !currentUser.isLoggedIn) {
-        showMessage('請先登入 Google 帳號才能下單', 'error');
+        showMessage('請先登入 Google 帳號才能下單 Please login with Google account first', 'error');
         return;
       }
 
@@ -994,40 +1574,41 @@
         loginEmail: currentUser.email
       };
 
-      // 禁用確認按鈕
+      // 禁用確認按鈕並關閉 Modal
       const confirmBtn = document.getElementById('confirmSubmitBtn');
       confirmBtn.disabled = true;
       confirmBtn.textContent = '處理中... Processing...';
 
+      // 關閉確認 Modal 並顯示全局 loading
+      closeConfirmModal();
+      showGlobalLoading('提交訂單中...');
+
       // 提交訂單
       google.script.run
         .withSuccessHandler(function(result) {
+          console.log('Order submission result:', result);
           confirmBtn.disabled = false;
           confirmBtn.textContent = '確認送出 Confirm & Submit';
-
-          // 關閉 Modal
-          closeConfirmModal();
+          hideGlobalLoading();
 
           if (result.success) {
-            showMessage(result.message, 'success');
-
             // 清空表單和購物車，還原產品選項
             resetOrderForm();
 
-            // 顯示 Sheet 連結
-            if (result.sheetUrl) {
-              setTimeout(() => {
-                showMessage(`訂單已成功提交並已寄送 Email！查看訂單記錄：${result.sheetUrl}`, 'success');
-              }, 500);
-            }
+            // 顯示成功動畫
+            showSuccessAnimation(result.sheetUrl);
+
+            // 確保用戶可以繼續下單
+            console.log('Order submitted successfully, ready for next order');
           } else {
             showMessage(result.message, 'error');
           }
         })
         .withFailureHandler(function(error) {
+          console.error('Order submission failed:', error);
           confirmBtn.disabled = false;
           confirmBtn.textContent = '確認送出 Confirm & Submit';
-          closeConfirmModal();
+          hideGlobalLoading();
           showMessage('提交失敗：' + error.message, 'error');
         })
         .submitOrder(orderData);
@@ -1035,11 +1616,24 @@
 
     // 重置訂單表單
     function resetOrderForm() {
-      // 清空客戶資訊（保留 Email）
+      console.log('Resetting order form...');
+
+      // 清空客戶資訊（保留 Email 和可能的姓名）
+      const currentName = document.getElementById('customerName').value;
+      const currentEmail = document.getElementById('customerEmail').value;
+
       document.getElementById('customerName').value = '';
       document.getElementById('customerPhone').value = '';
       document.getElementById('customerAddress').value = '';
       document.getElementById('orderNote').value = '';
+
+      // 如果有用戶資訊，重新填入
+      if (currentUser && currentUser.isLoggedIn) {
+        document.getElementById('customerEmail').value = currentUser.email;
+        if (currentUser.name && currentUser.name !== 'User') {
+          document.getElementById('customerName').value = currentUser.name;
+        }
+      }
 
       // 清空購物車
       cart = [];
@@ -1084,9 +1678,27 @@
     }
 
     // 頁面載入時初始化
+    let pageInitialized = false;
+
     window.onload = function() {
+      if (pageInitialized) {
+        console.log('Page already initialized, skipping...');
+        return;
+      }
+
+      pageInitialized = true;
+      console.log('Initializing page...');
       checkUserLogin();
     };
+
+    // 防止重複初始化
+    if (document.readyState === 'complete') {
+      if (!pageInitialized) {
+        pageInitialized = true;
+        console.log('Document already loaded, initializing...');
+        checkUserLogin();
+      }
+    }
   </script>
 </body>
 </html>
